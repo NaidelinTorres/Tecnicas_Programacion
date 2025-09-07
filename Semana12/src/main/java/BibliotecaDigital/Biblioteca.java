@@ -16,13 +16,17 @@ public class Biblioteca {
     private final Set<String> isbnsPrestados;
 
     public Biblioteca() {
-        this.catalogoPorIsbn = new HashMap<>();
-        this.usuariosPorId = new HashMap<>();
-        this.isbnsPrestados = new HashSet<>();
+        catalogoPorIsbn = new HashMap<>();
+        usuariosPorId = new HashMap<>();
+        isbnsPrestados = new HashSet<>();
     }
 
     // Gestión de Libros
     public void anadirLibro(Libro libro) {
+        if (libro == null) {
+            System.out.println("No se puede añadir un libro nulo.");
+            return;
+        }
         catalogoPorIsbn.put(libro.getIsbn(), libro);
     }
 
@@ -36,6 +40,10 @@ public class Biblioteca {
 
     // Gestión de Usuarios
     public void registrarUsuario(Usuario u) {
+        if (u == null) {
+            System.out.println("No se puede registrar un usuario nulo.");
+            return;
+        }
         usuariosPorId.put(u.getId(), u);
     }
 
@@ -60,25 +68,31 @@ public class Biblioteca {
             System.out.println("El libro ya está prestado.");
             return;
         }
-        u.getIsbnsPrestados().add(isbn);
+        u.prestarLibro(isbn);
         isbnsPrestados.add(isbn);
+        System.out.println("Libro '" + l.getTitulo() + "' prestado a " + u.getNombre() + ".");
     }
 
     public void devolverLibro(String idUsuario, String isbn) {
         Usuario u = usuariosPorId.get(idUsuario);
-        if (u == null) return;
-        if (u.getIsbnsPrestados().remove(isbn)) {
-            isbnsPrestados.remove(isbn);
+        if (u == null) {
+            System.out.println("Usuario no encontrado.");
+            return;
         }
+        if (!u.getIsbnsPrestados().contains(isbn)) {
+            System.out.println("El usuario no tenía prestado este libro.");
+            return;
+        }
+        u.devolverLibro(isbn);
+        isbnsPrestados.remove(isbn);
+        System.out.println("Libro devuelto correctamente por " + u.getNombre() + ".");
     }
 
     // Búsquedas
     public List<Libro> buscarPorTitulo(String texto) {
         List<Libro> res = new ArrayList<>();
         for (Libro l : catalogoPorIsbn.values()) {
-            if (l.getTitulo().toLowerCase().contains(texto.toLowerCase())) {
-                res.add(l);
-            }
+            if (l.getTitulo().toLowerCase().contains(texto.toLowerCase())) res.add(l);
         }
         return res;
     }
@@ -86,9 +100,7 @@ public class Biblioteca {
     public List<Libro> buscarPorAutor(String texto) {
         List<Libro> res = new ArrayList<>();
         for (Libro l : catalogoPorIsbn.values()) {
-            if (l.getAutor().toLowerCase().contains(texto.toLowerCase())) {
-                res.add(l);
-            }
+            if (l.getAutor().toLowerCase().contains(texto.toLowerCase())) res.add(l);
         }
         return res;
     }
@@ -96,9 +108,7 @@ public class Biblioteca {
     public List<Libro> buscarPorCategoria(String texto) {
         List<Libro> res = new ArrayList<>();
         for (Libro l : catalogoPorIsbn.values()) {
-            if (l.getCategoria().toLowerCase().contains(texto.toLowerCase())) {
-                res.add(l);
-            }
+            if (l.getCategoria().toLowerCase().contains(texto.toLowerCase())) res.add(l);
         }
         return res;
     }

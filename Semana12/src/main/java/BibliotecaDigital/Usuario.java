@@ -5,6 +5,7 @@
 package BibliotecaDigital;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Usuario {
@@ -23,7 +24,20 @@ public class Usuario {
 
     public String getId() { return id; }
     public String getNombre() { return nombre; }
-    public List<String> getIsbnsPrestados() { return isbnsPrestados; }
+
+    // Devolvemos una lista inmodificable para proteger la encapsulación
+    public List<String> getIsbnsPrestados() {
+        return Collections.unmodifiableList(isbnsPrestados);
+    }
+
+    // Método interno para Biblioteca para modificar libros prestados
+    protected void prestarLibro(String isbn) {
+        isbnsPrestados.add(isbn);
+    }
+
+    protected void devolverLibro(String isbn) {
+        isbnsPrestados.remove(isbn);
+    }
 
     @Override
     public String toString() {
