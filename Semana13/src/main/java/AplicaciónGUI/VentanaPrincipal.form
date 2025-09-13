@@ -70,7 +70,7 @@
     <Component class="javax.swing.JLabel" name="jLabelTitulo">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Aplicaci&#xf3;n GUI-Lista de datos"/>
+        <Property name="text" type="java.lang.String" value="Aplicaci&#xf3;n GUI-Lista de canciones"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -103,6 +103,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnLimpiar">
       <Properties>

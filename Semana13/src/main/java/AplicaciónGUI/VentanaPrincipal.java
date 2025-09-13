@@ -18,16 +18,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal() {
-    initComponents();                 // Código generado por NetBeans
-    modeloLista = new DefaultListModel<>();
-    jListDatos.setModel(modeloLista); // Asignas tu modelo aquí
-    
-    btnAgregar.addActionListener(evt -> btnAgregarActionPerformed(evt));
-    btnLimpiar.addActionListener(evt -> btnLimpiarActionPerformed(evt));
-    
-    txtEntrada.setText("                  ");
-}
+     public VentanaPrincipal() {
+        initComponents(); // Código generado por NetBeans
+
+        // Inicializamos el modelo y lo asignamos a la lista
+        modeloLista = new DefaultListModel<>();
+        jListDatos.setModel(modeloLista);
+
+        // Inicializamos el campo de texto vacío
+        txtEntrada.setText("                 ");
+
+        // Agregamos los ActionListeners
+        btnAgregar.addActionListener(evt -> btnAgregarActionPerformed(evt));
+        btnLimpiar.addActionListener(evt -> btnLimpiarActionPerformed(evt));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +52,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Aplicación GUI-Lista de datos");
+        jLabelTitulo.setText("Aplicación GUI-Lista de canciones");
 
         jListDatos.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "DefaultListModel" };
@@ -65,6 +69,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
 
@@ -113,26 +122,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // Si el usuario presiona Enter en el campo de texto,llama a la misma logica del botón Agregar
         btnAgregarActionPerformed(evt);
     }//GEN-LAST:event_txtEntradaActionPerformed
-    // Acción del botón "Agregar"
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // Acción del botón "Agregar"                                        
         // Obtiene el texto del campo de entrada y elimina espacios en blanco.
-        String tarea = txtEntrada.getText().trim();
+        String cancion = txtEntrada.getText().trim();
         
         // Valida que la entrada no esté vacía.
-        if (!tarea.isEmpty()) {
+        if (!cancion.isEmpty()) {
             // Agrega el texto al modelo de la lista.
-            modeloLista.addElement(tarea);
+            modeloLista.addElement(cancion);
             // Limpia el campo de texto después de agregar.
             txtEntrada.setText("");
         } else {
             // Muestra un mensaje de advertencia si la entrada está vacía.
             JOptionPane.showMessageDialog(this,
-                    "Por favor, ingresa una dato antes de agregarla.",
-                    "Entrada Vacía",
+                   "Por favor, ingresa una canción antes de agregarla.",
+                   "Entrada Vacía",
                     JOptionPane.WARNING_MESSAGE);
-        }
-    }                                        
-
+        }                                        
+    }//GEN-LAST:event_btnAgregarActionPerformed
      // Acción del botón "Limpiar"
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // Limpia todos los elementos del modelo de la lista.
