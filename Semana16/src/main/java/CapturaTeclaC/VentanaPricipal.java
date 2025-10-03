@@ -19,6 +19,7 @@ public class VentanaPricipal extends javax.swing.JFrame {
         initComponents();   
         inicializarModelo(); //Se carga el modelo dinámico
         registrarEventos(); //Se capturan las teclas
+        configurarBoton(); // accion del botón
     }
     // Inicializa la lista con un modelo dinámico
     private void inicializarModelo() {
@@ -56,6 +57,19 @@ public class VentanaPricipal extends javax.swing.JFrame {
         });
     }
     
+    // Acción para el botón
+    private void configurarBoton() {
+        miBoton.addActionListener(e -> {
+            int index = miLista.getSelectedIndex();
+            if (index != -1) {
+                JOptionPane.showMessageDialog(this, 
+                    "Seleccionaste: " + modeloLista.getElementAt(index));
+            } else {
+                JOptionPane.showMessageDialog(this, 
+                    "No has seleccionado ningún elemento.");
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
